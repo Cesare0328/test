@@ -1,0 +1,164 @@
+getgenv()normalspeed = false;
+getgenv()speed = false;
+
+local library = loadstring(game:HttpGet(('https://raw.githubusercontent.com/AikaV3rm/UiLib/master/Lib.lua')))()
+local w = library:CreateWindow("Race Around The World")
+local b = w:CreateFolder("speed17") 
+local c = w:CreateFolder("speed18")
+
+b:Toggle("speed17", function(bool)
+    getgenv().normalspeed = bool
+    if bool == true then
+        normspeed();
+    end
+end)
+
+b:Toggle("speed18", function(bool)
+    getgenv().speed = bool
+    if bool == true then
+        fullspeed();
+    end
+end)
+
+
+
+
+
+
+b:Label("Pretty Useless NGL",{
+    TextSize = 25; -- Self Explaining
+    TextColor = Color3.fromRGB(255,255,255); -- Self Explaining
+    BgColor = Color3.fromRGB(69,69,69); -- Self Explaining
+    
+}) 
+
+b:Button("Button",function()
+    print("Elym Winning")
+end)
+
+b:Toggle("Toggle",function(bool)
+    shared.toggle = bool
+    print(shared.toggle)
+end)
+
+b:Slider("Slider",{
+    min = 10; -- min value of the slider
+    max = 50; -- max value of the slider
+    precise = true; -- max 2 decimals
+},function(value)
+    print(value)
+end)
+
+b:Dropdown("Dropdown",{"A","B","C"},true,function(mob) --true/false, replaces the current title "Dropdown" with the option that t
+    print(mob)
+end)
+
+b:Bind("Bind",Enum.KeyCode.C,function() --Default bind
+    print("Yes")
+end)
+
+b:ColorPicker("ColorPicker",Color3.fromRGB(255,0,0),function(color) --Default color
+    print(color)
+end)
+
+b:Box("Box","number",function(value) -- "number" or "string"
+    print(value)
+end)
+
+b:DestroyGui()
+
+
+
+function normspeed()
+    spawn(function()
+        while getgenv().normalspeed == true do
+local getrawmetatable = getrawmetatable or debug.getmetatable
+local setrawmetatable = setrawmetatable or debug.setmetatable
+
+
+local Meta = getrawmetatable(game)
+local Me = game:GetService("Players").LocalPlayer
+local New = {}
+for Name, Method in next, Meta do
+New[Name] = Method
+end
+local FakeHumanoid = Instance.new("Humanoid")
+New.__index = newcclosure(function(self, index)
+if index == "WalkSpeed" then
+return 16
+elseif index == "Changed" then
+return Meta.__index(FakeHumanoid, "Changed")
+else
+return Meta.__index(self, index)
+end
+end)
+New.__namecall = newcclosure(function(self, ...)
+local Args = {...}
+local Method = Args[#Args]
+if Method == "GetPropertyChangedSignal" then
+return Meta.__namecall(FakeHumanoid, ...)
+else
+return Meta.__namecall(self, ...)
+end
+end)
+
+local HookChar = function(Char)
+if Char then
+setrawmetatable(Char:WaitForChild("Humanoid"), New)
+end
+end
+HookChar(Me.Character)
+Me.CharacterAdded:Connect(HookChar)
+wait(0.1)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 17
+wait(5)
+end
+end)
+end
+
+function fullspeed()
+    spawn(function()
+        while getgenv().speed == true do
+local getrawmetatable = getrawmetatable or debug.getmetatable
+local setrawmetatable = setrawmetatable or debug.setmetatable
+
+
+local Meta = getrawmetatable(game)
+local Me = game:GetService("Players").LocalPlayer
+local New = {}
+for Name, Method in next, Meta do
+New[Name] = Method
+end
+local FakeHumanoid = Instance.new("Humanoid")
+New.__index = newcclosure(function(self, index)
+if index == "WalkSpeed" then
+return 16
+elseif index == "Changed" then
+return Meta.__index(FakeHumanoid, "Changed")
+else
+return Meta.__index(self, index)
+end
+end)
+New.__namecall = newcclosure(function(self, ...)
+local Args = {...}
+local Method = Args[#Args]
+if Method == "GetPropertyChangedSignal" then
+return Meta.__namecall(FakeHumanoid, ...)
+else
+return Meta.__namecall(self, ...)
+end
+end)
+
+local HookChar = function(Char)
+if Char then
+setrawmetatable(Char:WaitForChild("Humanoid"), New)
+end
+end
+HookChar(Me.Character)
+Me.CharacterAdded:Connect(HookChar)
+wait(0.1)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 18
+wait(5)
+end
+end)
+end
